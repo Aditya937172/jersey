@@ -1,0 +1,25 @@
+{
+  "name": "jersey",
+  "version": "1.0.0",
+  "description": "Chat-based NFL jersey number generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "import:sheet": "node import-sheet.js",
+    "enhance:jerseys": "node enhance-jerseys.js",
+    "prepare:gpu": "node prepare-gpu.js",
+    "clean:catalog": "node clean-generated.js",
+    "preview:catalog": "node catalog-preview.js",
+    "sync:rosters": "node sync-rosters.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "express": "^5.3.0",
+    "opentype.js": "^2.0.0",
+    "sharp": "^0.35.5"
+  }
+}

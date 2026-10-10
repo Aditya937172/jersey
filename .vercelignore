@@ -1,0 +1,15 @@
+assets/teams-generated/
+assets/teams-hq/
+assets/teams/
+assets/jersey-sheet.png
+assets/reference-jersey.png
+assets/catalog-preview.png
+tools/
+Screenshot *.png
+clean-generated.js
+catalog-preview.js
+enhance-jerseys.js
+import-sheet.js
+prepare-gpu.js
+sync-rosters.js
+

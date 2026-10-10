@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f7f2" />
+  <title>Jersey Studio — Your number. Your team.</title>
+  <meta name="description" content="Type an NFL team and any jersey number to create a custom jersey image." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">10<span class="brand-notch"></span></span><span>JERSEY<span class="brand-light">STUDIO</span></span></div>
+      <div class="topbar-right"><span class="live-dot"></span> ALL 32 TEAMS <span class="divider"></span> MAKE IT YOURS</div>
+    </header>
+
+    <main class="chat-wrap">
+      <div class="chat-scroll" id="chatScroll" aria-live="polite">
+        <section class="intro" id="intro">
+          <div class="eyebrow"><span class="eyebrow-line"></span> THE CUSTOM JERSEY MAKER</div>
+          <h1>Your team.<br /><em>Your number.</em></h1>
+          <p>Type a player’s name for their latest roster number, or choose any team and number yourself.</p>
+          <div class="intro-rule"></div>
+          <div class="sample-label">TRY A REQUEST <span>↘</span></div>
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Patrick Mahomes"><span class="swatch" style="--swatch:#c8102e"></span> Patrick Mahomes <span class="arrow">↗</span></button>
+            <button class="suggestion" data-prompt="Rams 10"><span class="swatch" style="--swatch:#0055d8"></span> Rams 10 <span class="arrow">↗</span></button>
+            <button class="suggestion" data-prompt="Eagles 7"><span class="swatch" style="--swatch:#075057"></span> Eagles 7 <span class="arrow">↗</span></button>
+          </div>
+        </section>
+        <div class="messages" id="messages"></div>
+      </div>
+
+      <div class="composer-area">
+        <form id="chatForm" class="composer">
+          <div class="composer-icon">#</div>
+          <input id="prompt" name="prompt" autocomplete="off" aria-label="Player name or team and jersey number" placeholder="Try Patrick Mahomes or Chiefs 87" maxlength="300" required />
+          <button type="submit" class="send-button" aria-label="Create jersey"><span>CREATE</span><span class="send-arrow">↗</span></button>
+        </form>
+        <div class="composer-foot"><span>JERSEYS FROM YOUR REFERENCE · PLAYER DATA BY NFLVERSE</span><span>PLAYER NAME OR TEAM + NUMBER &nbsp;·&nbsp; HIT ENTER</span></div>
+      </div>
+    </main>
+  </div>
+  <script src="/app.js?v=native-download-5" defer></script>
+</body>
+</html>
