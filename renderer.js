@@ -26,15 +26,23 @@ function inkFor(team) {
 
 function numberSvg(number, withOutline) {
   const digits = String(number);
-  const glyph = font.getPath(digits, 0, 0, 1000);
+  const spacedOnes = digits === '11';
+  const glyph = font.getPath(spacedOnes ? '1' : digits, 0, 0, 1000);
   const box = glyph.getBoundingBox();
+  const secondOneOffset = spacedOnes ? font.getAdvanceWidth('1', 1000) + 65 : 0;
+  const rightEdge = spacedOnes ? box.x2 + secondOneOffset : box.x2;
   const width = digits.length === 1 ? 195 : digits.length === 2 ? 376 : digits.length === 3 ? 458 : 533;
   const height = digits.length > 2 ? 307 : 364;
-  const sx = width / (box.x2 - box.x1);
+  const sx = width / (rightEdge - box.x1);
   const sy = height / (box.y2 - box.y1);
-  const tx = SIZE / 2 - (box.x1 + box.x2) / 2 * sx;
+  // The wide left flags on "11" make its straight stems sit right of the
+  // torso center when the glyph bounds are centered. Align the stems instead.
+  const tx = SIZE / 2 - (box.x1 + rightEdge) / 2 * sx + (spacedOnes ? -36 : 0);
   const ty = (digits.length > 2 ? 473 : 439) - box.y1 * sy;
-  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}"><path d="${glyph.toPathData(2)}" transform="translate(${tx} ${ty}) scale(${sx} ${sy})" fill="white" ${withOutline ? 'stroke="white" stroke-width="27" stroke-linejoin="miter"' : ''}/></svg>`);
+  const pathData = glyph.toPathData(2);
+  const outline = withOutline ? 'stroke="white" stroke-width="27" stroke-linejoin="miter"' : '';
+  const paths = `<path d="${pathData}"/>${spacedOnes ? `<path d="${pathData}" transform="translate(${secondOneOffset} 0)"/>` : ''}`;
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}"><g transform="translate(${tx} ${ty}) scale(${sx} ${sy})" fill="white" ${outline}>${paths}</g></svg>`);
 }
 
 async function baseFor(team) {
