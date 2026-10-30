@@ -152,10 +152,12 @@ function refreshEditList() {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  const text = promptInput.value.trim();
+  const request = promptInput.value.trim();
+  const values = request.match(/\d{1,6}(?:[.,]\d{1,3})?\s*(?:%|x|×)?/gi) || [];
+  const text = values.at(-1)?.replace(/\s+/g, '') || '';
   if (!media) { message('Upload an image or video first.'); return; }
   if (!selection) { message('Drag around the value you want to change, then type the replacement.'); return; }
-  if (!/^\d{1,6}(?:[.,]\d{1,3})?\s*(?:%|x|×)?$/i.test(text)) { message('Type a value such as 30%, 3.3x, or 536.'); return; }
+  if (!/^\d{1,6}(?:[.,]\d{1,3})?(?:%|x|×)?$/i.test(text)) { message('Type a value such as 30%, 3.3x, or 536.'); return; }
   edits.push({ box: { ...selection }, text });
   message(`Replace selected value with ${text}`, 'user');
   message('Done. Select another value or export your file.');
