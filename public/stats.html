@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <title>Stats Editor — Jersey Studio</title>
+  <meta name="description" content="Replace percentages and multipliers in an image or video while preserving the original frame.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/stats.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand brand-link" href="/"><span class="brand-mark">10<span class="brand-notch"></span></span><span>JERSEY<span class="brand-light">STUDIO</span></span></a>
+      <div class="topbar-right"><a class="top-link active" href="/stats.html">STATS EDITOR</a><span class="divider"></span><a class="top-link" href="/">JERSEYS ↗</a></div>
+    </header>
+    <main class="stats-layout">
+      <section class="stats-chat" aria-label="Stats editing chat">
+        <div class="stats-chat-scroll" id="statsChatScroll">
+          <div class="stats-intro">
+            <div class="eyebrow"><span class="eyebrow-line"></span> FRAME BY FRAME, PIXEL BY PIXEL</div>
+            <h1>Change the<br><em>numbers.</em></h1>
+            <p>Upload a stats image or video. Drag around a value, then type the new percentage or multiplier below. Everything outside your selection stays in place.</p>
+          </div>
+          <div id="statsMessages" aria-live="polite"></div>
+        </div>
+        <div class="stats-composer-area">
+          <div class="stats-attach-row"><label class="upload-button" for="statsFile">＋ &nbsp; UPLOAD IMAGE OR VIDEO</label><input id="statsFile" type="file" accept="image/*,video/*"><span id="fileLabel">PNG, JPG, WEBP, MP4, MOV, WEBM</span></div>
+          <form id="statsForm" class="composer">
+            <div class="composer-icon">%</div>
+            <input id="statsPrompt" aria-label="New stat value" placeholder="Select a value, then type 30% or 3.3x" autocomplete="off" maxlength="60" required>
+            <button type="submit" class="send-button"><span>REPLACE</span><span class="send-arrow">↗</span></button>
+          </form>
+          <div class="composer-foot"><span>YOUR FILE STAYS ON THIS DEVICE</span><span>DRAG AROUND A VALUE · TYPE A REPLACEMENT · HIT ENTER</span></div>
+        </div>
+      </section>
+      <section class="stats-workspace" aria-label="Media editor">
+        <div class="workspace-head"><div><span class="workspace-kicker">LIVE CANVAS</span><h2>Original frame, new values.</h2></div><span id="mediaDetails" class="media-details">NO FILE YET</span></div>
+        <div class="canvas-stage" id="canvasStage">
+          <div class="empty-stage" id="emptyStage"><span class="empty-icon">%</span><strong>Your media goes here</strong><span>Upload a file to start editing.</span></div>
+          <canvas id="previewCanvas" aria-label="Uploaded media preview; drag to select a number"></canvas>
+          <div id="selectionBox" class="selection-box" hidden><span>SELECTED VALUE</span></div>
+          <video id="sourceVideo" playsinline muted preload="auto" hidden></video>
+        </div>
+        <div class="workspace-controls">
+          <div class="selection-info" id="selectionInfo">Drag over a number on the preview to select it.</div>
+          <div class="control-actions"><button id="playButton" class="plain-button" type="button" hidden>▶ PLAY</button><button id="clearButton" class="plain-button" type="button" disabled>CLEAR EDITS</button><button id="exportButton" class="export-button" type="button" disabled>↓ EXPORT</button></div>
+        </div>
+        <div class="edit-list" id="editList" hidden><div class="edit-list-title">YOUR REPLACEMENTS</div><div id="editItems"></div></div>
+        <p class="workspace-note">For best results, select the text tightly and include a little clean background around it. The editor samples nearby pixels for the fill. Video edits stay in the same position throughout the clip.</p>
+      </section>
+    </main>
+  </div>
+  <script src="/stats.js" defer></script>
+</body>
+</html>
